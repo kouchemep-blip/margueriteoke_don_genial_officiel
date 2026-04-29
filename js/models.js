@@ -346,7 +346,7 @@ document.getElementById('cartOverlay').addEventListener('click', closeCart);
 // ==============================
 // SITE BASE URL (pour les liens images dans WhatsApp)
 // ==============================
-const SITE_URL = 'https://ton-site.netlify.app'; // 👈 Remplace par ton URL Netlify
+const SITE_URL = 'https://margueriteoke-don-genial-officiel.netlify.app/'; // 👈 Remplace par ton URL Netlify
 
 // ==============================
 // RECAP PAGE
