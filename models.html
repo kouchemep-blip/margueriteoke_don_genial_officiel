@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modèles — The Beauty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/models.css"/>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-back">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Retour</span>
+  </a>
+  <div class="nav-logo">
+    <div class="logo-circle"><span>DG</span></div>
+    <span class="logo-text">DON GENIAL</span>
+  </div>
+  <button class="cart-btn" id="cartBtn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- HERO LOOKBOOK -->
+<section class="lookbook-hero" style="">
+  <div class="lh-bg">
+    <div class="lh-grain"></div>
+    <div class="lh-gradient"></div>
+  </div>
+  <div class="lh-content">
+    <span class="lh-label">
+      <span class="lh-dot"></span>
+      COLLECTION 2025
+    </span>
+    <h1 class="lh-title">
+      <span class="lh-t1">Nos</span>
+      <span class="lh-t2">Modèles</span>
+    </h1>
+    <p class="lh-sub">Sélectionnez vos tenues préférées · Commandez via WhatsApp</p>
+    <a href="#galerie" class="lh-scroll-cta">
+      <span>Explorer la collection</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </div>
+  <!-- Cinematic floating cards preview -->
+  <div class="lh-floaters">
+    <div class="lh-float lh-float--1" data-id="1"></div>
+    <div class="lh-float lh-float--2" data-id="7"></div>
+    <div class="lh-float lh-float--3" data-id="13"></div>
+  </div>
+</section>
+
+<!-- FILTERS + GALLERY -->
+<section class="galerie" id="galerie">
+  <div class="galerie-header">
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all">Tout</button>
+      <button class="filter-btn" data-filter="robe">Robes</button>
+      <button class="filter-btn" data-filter="tailleur">Tailleurs</button>
+      <button class="filter-btn" data-filter="casual">Casual</button>
+      <button class="filter-btn" data-filter="soiree">Soirée</button>
+      <button class="filter-btn" data-filter="traditionnel">Traditionnel</button>
+    </div>
+    <div class="galerie-count">
+      <span id="visibleCount">42</span> modèles
+    </div>
+  </div>
+
+  <div class="models-grid" id="modelsGrid">
+    <!-- injected by JS -->
+  </div>
+
+  <div class="load-more-wrap">
+    <button class="load-more-btn" id="loadMoreBtn">
+      <span>Voir plus</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <div>
+      <h3 class="cart-title">Mon Panier</h3>
+      <p class="cart-subtitle" id="cartSubtitle">0 modèle sélectionné</p>
+    </div>
+    <button class="cart-close-btn" id="cartClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+      </div>
+      <p>Votre panier est vide</p>
+      <span>Ajoutez des modèles pour commander</span>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span>Total sélectionné</span>
+      <span id="cartTotalCount">0 modèles</span>
+    </div>
+    <button class="cart-order-btn" id="orderBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Commander via WhatsApp
+    </button>
+    <p class="cart-order-note">Vous serez redirigé(e) vers WhatsApp avec votre sélection</p>
+  </div>
+</aside>
+
+<!-- MODEL LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lb-close" id="lbClose">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <button class="lb-prev" id="lbPrev">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="lb-next" id="lbNext">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <div class="lb-content">
+    <div class="lb-img-wrap">
+      <div class="lb-img" id="lbImg"></div>
+    </div>
+    <div class="lb-info">
+      <span class="lb-tag" id="lbTag"></span>
+      <h2 class="lb-title" id="lbTitle"></h2>
+      <p class="lb-desc" id="lbDesc"></p>
+      <div class="lb-meta">
+        <div class="lb-meta-item">
+          <span class="lb-meta-label">Matière</span>
+          <span class="lb-meta-val" id="lbMat"></span>
+        </div>
+        <div class="lb-meta-item">
+          <span class="lb-meta-label">Style</span>
+          <span class="lb-meta-val" id="lbStyle"></span>
+        </div>
+        <div class="lb-meta-item">
+          <span class="lb-meta-label">Taille</span>
+          <span class="lb-meta-val">S · M · L · XL</span>
+        </div>
+      </div>
+      <button class="lb-add-btn" id="lbAddBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        Ajouter au panier
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+  <span id="toastMsg">Modèle ajouté au panier</span>
+</div>
+
+<script src="js/models.js"></script>
+</body>
+</html>
