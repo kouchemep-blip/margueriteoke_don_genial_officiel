@@ -774,7 +774,7 @@ body:hover .cursor-follower {
   font-family: var(--font-display);
   font-size: 12rem;
   font-weight: 900;
-  color: rgba(173, 121, 140, 0.779);
+  color: rgba(173, 121, 140, 0.409);
   letter-spacing: -0.03em;
   user-select: none;
   white-space: nowrap;
