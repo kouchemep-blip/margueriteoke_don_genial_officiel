@@ -77,8 +77,14 @@ function closeMobileMenu() {
   setTimeout(() => { mobileMenu.style.display = 'none'; }, 400);
 }
 
-hamburger.addEventListener('click', openMobileMenu);
-mobileClose.addEventListener('click', closeMobileMenu);
+hamburger.addEventListener('click', () => {
+  openMobileMenu();
+  hamburger.setAttribute('aria-expanded', 'true');
+});
+mobileClose.addEventListener('click', () => {
+  closeMobileMenu();
+  hamburger.setAttribute('aria-expanded', 'false');
+});
 
 document.querySelectorAll('.mob-link').forEach(link => {
   link.addEventListener('click', closeMobileMenu);
@@ -214,6 +220,11 @@ document.querySelectorAll('.col-card').forEach(card => {
     setTimeout(() => card.style.transition = '', 500);
   });
 });
+
+// Init circular gallery sur mobile/tablette
+if (window.innerWidth <= 1024) {
+  initCircularGallery();
+}
 
 console.log('%c✦ DON GENIAL', 'color: #D15180; font-size: 2rem; font-weight: bold;');
 console.log('%cAtelier de couture — Built with passion - Prince Koucheme', 'color: #8a8590; font-size: 1rem;');

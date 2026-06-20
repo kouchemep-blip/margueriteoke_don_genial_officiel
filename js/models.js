@@ -135,12 +135,12 @@ function buildCardStyle(model) {
 
 function renderCard(model, delay = 0) {
   const isInCart = cart.some(i => i.id === model.id);
-  const imgStyle = model.img ? `background-image:url('${model.img}')` : '';
+const imgStyle = model.img ? `data-bg="url('${model.img}')"` : '';
 
   return `
   <div class="model-card" data-id="${model.id}" data-cat="${model.cat}" style="animation-delay:${delay}ms">
     <div class="mc-img ${!model.img ? 'mc-img-placeholder ' + model.variant : ''}" 
-         style="${imgStyle}" 
+         ${imgStyle} 
          data-num="${String(model.id).padStart(2,'0')}">
       ${model.badge ? `<span class="mc-badge ${model.badgeGold ? 'mc-badge-gold' : ''}">${model.badge}</span>` : ''}
       <div class="mc-check ${isInCart ? 'visible' : ''}" id="check-${model.id}">
@@ -188,6 +188,7 @@ function renderGrid(reset = false) {
       div.innerHTML = renderCard(m, i * 60);
       grid.appendChild(div.firstElementChild);
     });
+    observeLazyImages();
   }
 
   document.getElementById('visibleCount').textContent = filteredModels.length;
@@ -202,6 +203,24 @@ function renderGrid(reset = false) {
     entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = 1; });
   }, { threshold: 0.08 });
   document.querySelectorAll('.model-card').forEach(c => observer.observe(c));
+}
+
+const bgObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const bg = el.getAttribute('data-bg');
+      if (bg) {
+        el.style.backgroundImage = bg;
+        el.removeAttribute('data-bg');
+      }
+      bgObserver.unobserve(el);
+    }
+  });
+}, { rootMargin: '200px' });
+
+function observeLazyImages() {
+  document.querySelectorAll('[data-bg]').forEach(el => bgObserver.observe(el));
 }
 
 // ==============================
@@ -592,4 +611,4 @@ addCursorHover(document.getElementById('cartBtn'));
 addCursorHover(document.getElementById('orderBtn'));
 addCursorHover(document.getElementById('lbAddBtn'));
 
-console.log('%c✦ THE BEAUTY — Models', 'color:#D15180;font-size:1.5rem;font-weight:bold;');
+console.log('%c✦ Don Génial — Models', 'color:#D15180;font-size:1.5rem;font-weight:bold;');

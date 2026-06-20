@@ -841,6 +841,23 @@ body:hover .cursor-follower {
   margin-top: 0.5rem;
 }
 
+.about-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--pink);
+  text-transform: uppercase;
+  transition: gap 0.3s var(--transition);
+  text-decoration: none;
+}
+.about-cta-link:hover {
+  gap: 1.4rem;
+}
+
 /* ======= COLLECTION ======= */
 .collection {
   padding: 10rem 5%;
