@@ -163,7 +163,9 @@
 
     <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
-      <button class="mobile-close" id="mobileClose">✕</button>
+      <button class="mobile-close" id="mobileClose" aria-label="Fermer le menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
       <ul>
         <li><a href="#hero" class="mob-link">Accueil</a></li>
         <li><a href="#about" class="mob-link">À propos</a></li>
@@ -185,7 +187,7 @@
         <div class="hero-particles" id="particles"></div>
         <!-- IMAGE PLACEHOLDER - remplacez src par votre cover.jpg -->
         <div class="hero-img-container">
-          <img src="./images/cover.webp" alt="" />
+          <img src="./images/cover.webp" alt="" loading="lazy" decoding="async" width="1920" height="1080" />
           <div class="hero-img-placeholder">
             <div class="placeholder-pattern"></div>
             <span class="placeholder-text"></span>
@@ -300,7 +302,7 @@
       <div class="collection-header">
         <span class="section-label">PARCOUREZ LE CATALOGUE !</span>
         <h2 class="collection-title">Les Models</h2>
-      </div>
+      </div> 
       <div class="collection-grid">
         <div class="col-card col-card--large">
           <div class="col-card-img col-card-img--1"></div>
@@ -395,11 +397,11 @@
             <span class="cc-label">Téléphone</span>
             <span class="cc-value">0197 476 434</span>
           </a>
-          <a href="mailto:kouchemep@gmail.com" class="contact-card">
-            <div class="cc-icon">✉️</div>
-            <span class="cc-label">Email</span>
-            <span class="cc-value">kouchemep@gmail.com</span>
-          </a>
+          <div class="contact-card" id="mapTrigger">
+            <div class="cc-icon">📍</div>
+            <span class="cc-label">Nous trouver</span>
+            <span class="cc-value">Cotonou, Bénin</span>
+          </div>
           <div class="contact-card">
             <div class="cc-icon">👤</div>
             <span class="cc-label">PATRONNE</span>
@@ -408,6 +410,23 @@
         </div>
       </div>
     </section>
+
+    <!-- MAP MODAL -->
+    <div class="modal-overlay" id="mapModal">
+      <div class="modal-box map-modal-box">
+        <button class="modal-close" id="closeMapModal">✕</button>
+        <div class="modal-header">
+          <span class="section-label">LOCALISATION</span>
+          <h3>Nous trouver</h3>
+        </div>
+        <div class="map-wrap">
+          <iframe id="mapIframe" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1352.693072955517!2d2.4400261427510226!3d6.394051185433727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sbj!4v1783389128887!5m2!1sfr!2sbj" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <p class="modal-news" style="margin-top: 2rem;">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=6.394051,2.440026" target="_blank" class="about-cta-link">Ouvrir l'itinéraire dans Google Maps →</a>
+        </p>
+      </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer">

@@ -70,21 +70,19 @@ const mobileClose = document.getElementById('mobileClose');
 
 function openMobileMenu() {
   mobileMenu.style.display = 'flex';
+  hamburger.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
   setTimeout(() => mobileMenu.classList.add('open'), 10);
 }
 function closeMobileMenu() {
   mobileMenu.classList.remove('open');
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
   setTimeout(() => { mobileMenu.style.display = 'none'; }, 400);
 }
 
-hamburger.addEventListener('click', () => {
-  openMobileMenu();
-  hamburger.setAttribute('aria-expanded', 'true');
-});
-mobileClose.addEventListener('click', () => {
-  closeMobileMenu();
-  hamburger.setAttribute('aria-expanded', 'false');
-});
+hamburger.addEventListener('click', openMobileMenu);
+mobileClose.addEventListener('click', closeMobileMenu);
 
 document.querySelectorAll('.mob-link').forEach(link => {
   link.addEventListener('click', closeMobileMenu);
@@ -177,6 +175,38 @@ modal.addEventListener('click', e => {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
+
+// ======= MAP MODAL =======
+const mapModal = document.getElementById('mapModal');
+const mapTrigger = document.getElementById('mapTrigger');
+const closeMapModal = document.getElementById('closeMapModal');
+
+if (mapTrigger) {
+  mapTrigger.addEventListener('click', () => {
+    mapModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+}
+if (closeMapModal) {
+  closeMapModal.addEventListener('click', () => {
+    mapModal.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+}
+if (mapModal) {
+  mapModal.addEventListener('click', e => {
+    if (e.target === mapModal) {
+      mapModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mapModal.classList.contains('open')) {
+      mapModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+}
 
 // ======= SMOOTH REVEAL: Nav links active on scroll =======
 const sections = document.querySelectorAll('section[id]');

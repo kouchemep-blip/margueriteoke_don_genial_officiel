@@ -82,7 +82,42 @@ const MODELS_DATA = [
   { id:70, name:'Tailleur Soirée',     cat:'tailleur',     tag:'Tailleurs',    mat:'Satin structuré',   style:'Evening power',      desc:'Tailleur de soirée en satin structuré. L\'autorité au féminin pour les grandes occasions.', badge:'Exclusif', badgeGold:false, img:'images/ModeAfricaine/Web_Optimized/image_070.webp', variant:'mc-v4' },
   { id:71, name:'Robe Ceremonie Wax',  cat:'traditionnel', tag:'Traditionnel', mat:'Wax cérémoniel',    style:'Grande cérémonie',   desc:'Robe de grande cérémonie en wax. Pour les moments qui comptent vraiment.', badge:'Tendance', badgeGold:false, img:'images/ModeAfricaine/Web_Optimized/image_071.webp', variant:'mc-v1' },
   { id:72, name:'Finale Royale',       cat:'traditionnel', tag:'Traditionnel', mat:'Or & soie',         style:'Royauté africaine',  desc:'La pièce ultime. Or et soie tissés pour la femme africaine qui règne. Collection exclusive.', badge:'★ Best', badgeGold:true, img:'images/ModeAfricaine/Web_Optimized/image_072.webp', variant:'mc-v3' },
+  { id:73, name:'Soutane 1', cat:'Soutanes', tag:'Soutanes', mat:'Cotton blanc', style:'Sacerdotale', desc:'Soutane blanche en coton légère et aérée. Confort absolu pour le sacerdoce au quotidien.', badge:'Nouveau', badgeGold:false, img:'images/ModeAfricaine/Soutanes/soutane1.webp', variant:'mc-v2' },
+  { id:74, name:'Soutane 2', cat:'Soutanes', tag:'Soutanes', mat:'Lin beige', style:'Sacerdotale', desc:'Soutane en lin beige noble. Sobriété et élégance pour les cérémonies religieuses.', badge:'★ Best', badgeGold:true, img:'images/ModeAfricaine/Soutanes/soutane2.webp', variant:'mc-v3' },
+  { id:75, name:'Soutane 3', cat:'Soutanes', tag:'Soutanes', mat:'Polycoton gris', style:'Sacerdotale', desc:'Soutane gris perle en polycoton infroissable. Pratique et distinguée pour le service divin.', badge:null, badgeGold:false, img:'images/ModeAfricaine/Soutanes/soutane3.webp', variant:'mc-v4' },
+  { id:76, name:'Soutane 4', cat:'Soutanes', tag:'Soutanes', mat:'Coton biologique', style:'Sacerdotale', desc:'Soutane en coton bio certifié. Douceur sur la peau et respect de la création.', badge:'Artisanal', badgeGold:false, img:'images/ModeAfricaine/Soutanes/soutane4.webp', variant:'mc-v5' },
+  { id:77, name:'Soutane 5', cat:'Soutanes', tag:'Soutanes', mat:'Lin crème', style:'Sacerdotale', desc:'Soutane crème en lin lavé. Légèreté et élégance intemporelle pour vos offices.', badge:'Tendance', badgeGold:false, img:'images/ModeAfricaine/Soutanes/soutane5.webp', variant:'mc-v1' },
+  { id:78, name:'Soutane 6', cat:'Soutanes', tag:'Soutanes', mat:'Coton éponge', style:'Sacerdotale', desc:'Soutane en coton éponge douce et absorbante. Idéale pour les longues journées de ministère.', badge:null, badgeGold:false, img:'images/ModeAfricaine/Soutanes/soutane6.webp', variant:'mc-v6' },
+  { id:79, name:'Soutane 7', cat:'Soutanes', tag:'Soutanes', mat:'Polyester blanc', style:'Sacerdotale', desc:'Soutane blanche en polyester de qualité. Entretien facile et tenue impeccable toute la journée.', badge:'Exclusif', badgeGold:true, img:'images/ModeAfricaine/Soutanes/soutane7.webp', variant:'mc-v2' },
+  { id:80, name:'Soutane 8', cat:'Soutanes', tag:'Soutanes', mat:'Coton & lin', style:'Sacerdotale', desc:'Soutane mixtes coton-lin. Le meilleur des deux mondes pour un confort sacré au quotidien.', badge:'Tendance', badgeGold:false, img:'images/ModeAfricaine/Soutanes/soutane8.webp', variant:'mc-v3' },
+  { id:81, name:'Soutane 9', cat:'Soutanes', tag:'Soutanes', mat:'Lin blanc pur', style:'Sacerdotale', desc:'Soutane en lin blanc pur haute couture. Pureté et raffinement pour les grandes célébrations.', badge:'★ Best', badgeGold:true, img:'images/ModeAfricaine/Soutanes/soutane9.webp', variant:'mc-v1' },
+  { id:82, name:'Soutane 10', cat:'Soutanes', tag:'Soutanes', mat:'Coton gris clair', style:'Sacerdotale', desc:'Soutane gris clair en coton doux. Discrétion et dignité pour le service pastoral.', badge:null, badgeGold:false, img:'images/ModeAfricaine/Soutanes/soutane10.webp', variant:'mc-v4' },
+  { id:83, name:'Soutane 11', cat:'Soutanes', tag:'Soutanes', mat:'Lin é cru', style:'Sacerdotale', desc:'Soutane en lin écru naturel. Retour aux sources pour une élégance authentique et spirituelle.', badge:'Exclusif', badgeGold:true, img:'images/ModeAfricaine/Soutanes/soutane11.webp', variant:'mc-v5' },
 ];
+
+// ==============================
+// UTILITAIRE — Éparpiller les soutanes dans la vue "Tout"
+// ==============================
+function getDisplayModels(filter) {
+  if (filter !== 'Soutanes' && filter !== 'all') {
+    return MODELS_DATA.filter(m => m.cat === filter);
+  }
+  if (filter === 'Soutanes') {
+    return MODELS_DATA.filter(m => m.cat === 'Soutanes');
+  }
+  const regular = MODELS_DATA.filter(m => m.cat !== 'Soutanes');
+  const soutanes = MODELS_DATA.filter(m => m.cat === 'Soutanes');
+  const result = [];
+  let si = 0;
+  for (let i = 0; i < regular.length; i++) {
+    result.push(regular[i]);
+    if ((i + 1) % 7 === 0 && si < soutanes.length) {
+      result.push(soutanes[si++]);
+    }
+  }
+  while (si < soutanes.length) result.push(soutanes[si++]);
+  return result;
+}
 
 // ==============================
 // STATE
@@ -90,7 +125,7 @@ const MODELS_DATA = [
 let cart = [];
 let currentFilter = 'all';
 let lightboxIndex = 0;
-let filteredModels = [...MODELS_DATA];
+let filteredModels = getDisplayModels('all');
 let displayedCount = 12;
 
 // ==============================
@@ -171,9 +206,7 @@ const imgStyle = model.img ? `data-bg="url('${model.img}')"` : '';
 function renderGrid(reset = false) {
   const grid = document.getElementById('modelsGrid');
   if (reset) {
-    filteredModels = currentFilter === 'all'
-      ? [...MODELS_DATA]
-      : MODELS_DATA.filter(m => m.cat === currentFilter);
+    filteredModels = getDisplayModels(currentFilter);
     displayedCount = 12;
   }
 
@@ -182,6 +215,7 @@ function renderGrid(reset = false) {
 
   if (reset) {
     grid.innerHTML = toShow.map((m, i) => renderCard(m, i * 60)).join('');
+    observeLazyImages();
   } else {
     toShow.slice(start).forEach((m, i) => {
       const div = document.createElement('div');
